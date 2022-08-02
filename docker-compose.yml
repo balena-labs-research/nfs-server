@@ -1,0 +1,21 @@
+version: "2"
+
+services:
+  nfs:
+    build:
+      context: ./nfs
+      dockerfile: Dockerfile
+    restart: always
+    network_mode: host
+    privileged: true
+    labels:
+      io.balena.features.kernel-modules: "1"
+      io.balena.features.sysfs: "1"
+      io.balena.features.procfs: "1"
+
+    # If content from your primary image is required in the volume ensure this container depends
+    # on the primary image. This will ensure your primary container creates the volume and inserts
+    # your content.
+
+    # depends_on:
+    #  - name_of_primary_container
