@@ -1,0 +1,66 @@
+name: NFS Server
+description: >-
+  Serve contents of a volume via an NFS server to allow mounting on your local system
+type: sw.block
+assets:
+  repository:
+    type: blob.asset
+    data:
+      url: "https://github.com/maggie0002/nfs-server"
+  logo:
+    type: blob.asset
+    data:
+      url: "https://github.com/maggie0002/balena-apps-logo/raw/main/logo.png"
+post-provisioning: >-
+  ## NFS Server
+
+  This container exposes the content of a volume for mounting to your local system. Ideal for developing locally while testing on device.
+
+  ### Starting the server
+
+  Add this container to your docker-compose file to share a volume called `nfs`:
+
+  ```
+  version: "2"
+
+  services:
+    nfs:
+      build:
+        context: ./nfs
+        dockerfile: Dockerfile
+      restart: always
+      network_mode: host
+      privileged: true
+      labels:
+        io.balena.features.kernel-modules: "1"
+        io.balena.features.sysfs: "1"
+        io.balena.features.procfs: "1"
+
+      # If content from your primary image is required in the volume ensure this container depends
+      # on the primary image. This will ensure your primary container creates the volume and inserts
+      # your content.
+
+      # depends_on:
+      #  - name_of_primary_container
+  ```
+
+  If you already have services running, you can start this container manually. Connect to your device with SSH then run:
+  
+  ```
+  balena run -it --privileged --network host -v /lib/modules:/lib/modules -v /sys/fs:/sys/fs -v nfs:/nfs bh.cr/maggie0002/nfs-server`
+  ```
+
+  ### Accessing the server
+
+  Once running, on your Mac you can run the following to make the volume accessible on your system:
+
+  `mount_nfs hostname.local:/nfs ./local_dir`
+data:
+  defaultDeviceType: raspberrypi4-64
+  supportedDeviceTypes:
+    - raspberry-pi
+    - raspberry-pi2
+    - raspberrypi3
+    - raspberrypi3-64
+    - raspberrypi4-64
+    - fincm3
