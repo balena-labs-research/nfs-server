@@ -1,7 +1,7 @@
 name: NFS Server
 description: >-
   Serve contents of a volume via an NFS server to allow mounting on your local system
-type: sw.application
+type: sw.block
 assets:
   repository:
     type: blob.asset
