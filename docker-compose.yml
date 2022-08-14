@@ -2,7 +2,9 @@ version: "2"
 
 services:
   nfs:
-    build: ./Dockerfile
+    build:
+      context: .
+      dockerfile: Dockerfile
     volumes:
       - "nfs:/nfs"
     restart: always
