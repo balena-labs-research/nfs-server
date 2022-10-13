@@ -6,11 +6,11 @@ assets:
   repository:
     type: blob.asset
     data:
-      url: "https://github.com/maggie0002/nfs-server"
+      url: "https://github.com/balena-labs-research/nfs-server/tree/main"
   logo:
     type: blob.asset
     data:
-      url: "https://github.com/maggie0002/balena-apps-logo/raw/main/logo.png"
+      url: "https://github.com/balena-labs-research/apps-logo"
 post-provisioning: >-
   ## NFS Server
 

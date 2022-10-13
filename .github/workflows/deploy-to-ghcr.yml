@@ -7,7 +7,7 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: maggie0002/nfs-server
+  IMAGE_NAME: balena-labs-research/nfs-server
 
 jobs:
   deploy-to-gcr:
